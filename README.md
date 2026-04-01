@@ -16,6 +16,10 @@ Install dependencies:
 
 `npm install`
 
+Run the dev server:
+
+`npm run dev`
+
 Open your browser at http://localhost:5173
 
 ## Structure
