@@ -2,41 +2,32 @@
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-## Creating a project
+## Fuzzchain UI
 
-If you're seeing this, you've probably already done this step. Congrats!
+FuzzChain frontend built with SvelteKit + Tailwind CSS
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## Setup
 
-To recreate this project with the same configuration:
+Clone repo:
+`git clone https://github.com/Mayrinamelie/fuzzchain-ui.git`
+`cd fuzzchain-ui`
 
-```sh
-# recreate this project
-npx sv@0.13.1 create --template minimal --no-types --install npm fuzzchain-ui
-```
+Install dependencies:
 
-## Developing
+`npm install`
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Run the dev server:
 
-```sh
-npm run dev
+`npm run dev`
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Open your browser at http://localhost:5173
 
-## Building
+## Structure
+src/lib/components/ - reusable components
 
-To create a production version of your app:
+src/routes/ - pages (one folder per page)
 
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+##Notes
+- we are using svelte 5
+- use $props() isntead of export let
+- -Use onclick instead of on:click
