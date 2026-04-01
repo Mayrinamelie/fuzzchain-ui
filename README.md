@@ -9,12 +9,12 @@ FuzzChain frontend built with SvelteKit + Tailwind CSS
 ## Setup
 
 Clone repo:
-git clone https://github.com/Mayrinamelie/fuzzchain-ui.git
-cd fuzzchain-ui
+`git clone https://github.com/Mayrinamelie/fuzzchain-ui.git`
+`cd fuzzchain-ui`
 
-Install dependencies
+Install dependencies:
 
-npm install
+`npm install`
 
 Open your browser at http://localhost:5173
 
