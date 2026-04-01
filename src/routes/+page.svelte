@@ -1,10 +1,15 @@
 <script>
+  import Sidebar from '$lib/components/Sidebar.svelte';
   import Button from '$lib/components/Button.svelte';
 </script>
 
-<div class="p-8 flex gap-4">
-  <Button label="Create Project" variant="primary" />
-  <Button label="Cancel" variant="secondary" />
-  <Button label="Import" variant="outline" />
-  <Button label="Delete" variant="danger" />
+<div class="flex">
+  <Sidebar activePage="home" />
+  
+  <div class="flex-1 p-6">
+    <div class="flex gap-3">
+      <Button label="Create Project" variant="primary" />
+      <Button label="Import Project" variant="secondary" />
+    </div>
+  </div>
 </div>
