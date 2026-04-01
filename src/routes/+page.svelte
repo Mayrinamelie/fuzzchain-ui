@@ -3,6 +3,7 @@
   import Button from '$lib/components/Button.svelte';
   import Card from '$lib/components/Card.svelte';
   import CardRow from '$lib/components/CardRow.svelte';
+  import { goto } from '$app/navigation';
   import CreateProjectModal from '$lib/components/modals/CreateProjectModal.svelte';
 
   let openCreateModal = $state(false);
@@ -27,6 +28,13 @@
         label="Import Project"
         variant="primary"
       />
+
+      <Button
+	label="Dev Tools: Fuzzing"
+	varient="primary"
+	onclick={() => goto('/fuzzing') }
+      />
+      
     </div>
 
     <!-- columns sets the grid for every row, auto =fits the content -->
