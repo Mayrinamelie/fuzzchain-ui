@@ -1,114 +1,34 @@
 <script>
-  let { open = false, projectName = '', onClose = () => {} } = $props();
+  import ModalForm from '$lib/components/ModalForm.svelte';
+  import TextField from '$lib/components/TextField.svelte';
+  import ModalActions from '$lib/components/ModalActions.svelte';
 
-  function handleBackdropClick(event) {
-    if (event.currentTarget === event.target) {
-      onClose();
-    }
+  let { open = false, onClose = () => {} } = $props();
+
+  let fileName = $state("");
+  let format = $state("");
+  let saveTo = $state("");
+
+  function handleCreate() {
+    console.log({
+      fileName,
+      format,
+      saveTo,
+    });
+
+    onClose();
   }
 </script>
 
-{#if open}
-  <div class="modal-backdrop" role="presentation" onclick={handleBackdropClick}>
-    <div
-      class="modal-card"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="export-project-title"
-    >
-      <div class="modal-header">
-        <h2 id="export-project-title">Export Project</h2>
-        <button class="close-btn" type="button" aria-label="Close export project popup" onclick={onClose}>
-          ×
-        </button>
-      </div>
+<ModalForm {open} title="Export Project" onClose={onClose}>
+  <TextField label="File Name" placeholder="File Name" bind:value={fileName} />
+  <TextField label="Format" placeholder="Archive (.zip) (default)" bind:value={format} />
+  <TextField label="Save To" placeholder="Downloads" bind:value={saveTo} />
 
-      <p>This is a placeholder popup for the Export Project flow.</p>
-      <p>
-        {#if projectName}
-          Selected project: <strong>{projectName}</strong>
-        {:else}
-          No project is currently selected.
-        {/if}
-      </p>
-      <p>You can replace this later with file format options, destination handling, or confirmation logic.</p>
-
-      <div class="modal-actions">
-        <button class="primary-btn" type="button" onclick={onClose}>Close</button>
-      </div>
-    </div>
-  </div>
-{/if}
-
-<style>
-  .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: rgba(0, 0, 0, 0.45);
-  }
-
-  .modal-card {
-    width: min(100%, 480px);
-    border-radius: 16px;
-    background: #ffffff;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
-    padding: 24px;
-  }
-
-  .modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.35rem;
-    font-weight: 700;
-  }
-
-  .close-btn,
-  .primary-btn {
-    border: 0;
-    font: inherit;
-    cursor: pointer;
-  }
-
-  .close-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 999px;
-    background: #f0f0f0;
-    font-size: 1.4rem;
-    line-height: 1;
-  }
-
-  p {
-    margin: 0 0 10px;
-    color: #2c2c2c;
-    line-height: 1.5;
-  }
-
-  .modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-  }
-
-  .primary-btn {
-    min-width: 110px;
-    height: 40px;
-    padding: 0 18px;
-    border-radius: 10px;
-    background: #000000;
-    color: #ffffff;
-    font-weight: 600;
-  }
-</style>
+  <ModalActions
+    primaryLabel="Export"
+    secondaryLabel="Cancel"
+    onPrimary={handleCreate}
+    onSecondary={onClose}
+  />
+</ModalForm>
