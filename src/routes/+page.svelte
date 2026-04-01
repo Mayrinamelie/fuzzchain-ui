@@ -44,7 +44,7 @@
           Import Project
         </button>
 
-	<button class="action=btn" type="button" onclick={() => goto('/fuzzing') }>
+	<button class="action-btn" type="button" onclick={() => goto('/fuzzing') }>
 	  Dev Tools: Fuzzing
 	</button>
 	
