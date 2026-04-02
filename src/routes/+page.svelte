@@ -1,4 +1,5 @@
 <script>
+  import { goto } from '$app/navigation';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import CreateProjectModal from '$lib/components/modals/CreateProjectModal.svelte';
   import ImportProjectModal from '$lib/components/modals/ImportProjectModal.svelte';
@@ -10,19 +11,18 @@
   let selectedProjectName = $state('');
 
   let projects = [
-    { name: 'Project Name', created: 'mm/dd/yyyy', modified: 'mm/dd/yyyy' },
-    { name: 'Project Name', created: 'mm/dd/yyyy', modified: 'mm/dd/yyyy' },
-    { name: 'Project Name', created: 'mm/dd/yyyy', modified: 'mm/dd/yyyy' },
-    { name: 'Project Name', created: 'mm/dd/yyyy', modified: 'mm/dd/yyyy' },
-    { name: 'Project Name', created: 'mm/dd/yyyy', modified: 'mm/dd/yyyy' },
-    { name: 'Project Name', created: 'mm/dd/yyyy', modified: 'mm/dd/yyyy' },
-    { name: 'Project Name', created: 'mm/dd/yyyy', modified: 'mm/dd/yyyy' }
+  { id: '1', name: 'Project Alpha', created: '01/01/2026', modified: '01/15/2026' },
+  { id: '2', name: 'Project Beta', created: '01/05/2026', modified: '01/20/2026' },
   ];
 
   function openExportPopup(projectName) {
     selectedProjectName = projectName;
     openExportModal = true;
   }
+  function openProject(projectId) {
+    goto(`/project/${projectId}`);
+  }
+
 </script>
 
 <div class="page-shell">
@@ -83,7 +83,9 @@
             <div class="cell">{project.created}</div>
             <div class="cell">{project.modified}</div>
             <div class="row-actions">
-              <button class="mini-btn" type="button">Open</button>
+              <button class="mini-btn" type="button" onclick={() => openProject(project.id)}>
+                Open
+              </button>
               <button class="mini-btn" type="button" onclick={() => openExportPopup(project.name)}>
                 Export
               </button>

@@ -1,4 +1,6 @@
 <script>
+  import { page } from '$app/stores';
+  import { derived } from 'svelte/store';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import Card from '$lib/components/Card.svelte';
   import CardRow from '$lib/components/CardRow.svelte';
@@ -9,14 +11,23 @@
   import ServiceRow from '$lib/components/ServiceRow.svelte';
   import FileUpload from '$lib/components/FileUpload.svelte';
 
+  // Get project ID from URL as a derived store
+  const projectId = derived(page, $page => $page.params.id);
+
+  // Optional: subscribe to get a plain value
+  let currentProjectId;
+  projectId.subscribe(value => {
+    currentProjectId = value;
+  });
+
   // State
   let expandedTarget = $state(null);
-  let expandedServices = $state({}); // Track expanded service per target
+  let expandedServices = $state({});
   let showAddService = $state(false);
   let showCreateHost = $state(false);
   let showIngestScans = $state(false);
   let selectedTargetId = $state(null);
-  let selectedEndpoints = $state({}); // { [endpointId]: true/false }
+  let selectedEndpoints = $state({});
 
   // Form state for Create Host
   let newHost = $state({
@@ -36,11 +47,11 @@
 
   // Form state for Ingest Scans
   let scanFile = $state(null);
-  let scanType = $state('nmap'); // nmap, masscan, nuclei, etc.
+  let scanType = $state('nmap');
 
   // Mock project data
   const project = {
-    id: "1",
+    id: currentProjectId,
     name: "Demo Project"
   };
 
@@ -108,19 +119,16 @@
 
   function handleCreateHost() {
     console.log('Creating host:', newHost);
-    // Add your host creation logic here
     showCreateHost = false;
   }
 
   function handleIngestScans() {
     console.log('Ingesting scan:', { file: scanFile, type: scanType });
-    // Add your scan ingestion logic here
     showIngestScans = false;
   }
 
   function handleAddService() {
     console.log('Adding service to target:', selectedTargetId, newService);
-    // Add your service creation logic here
     showAddService = false;
   }
 
