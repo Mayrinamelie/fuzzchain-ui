@@ -4,7 +4,6 @@
   import CreateProjectModal from '$lib/components/modals/CreateProjectModal.svelte';
   import ImportProjectModal from '$lib/components/modals/ImportProjectModal.svelte';
   import ExportProjectModal from '$lib/components/modals/ExportProjectModal.svelte';
-  import { goto } from '$app/navigation';
 
   let openCreateModal = $state(false);
   let openImportModal = $state(false);
@@ -43,10 +42,6 @@
 	<button class="action-btn" type="button" onclick={() => { openImportModal = true; }}>
           Import Project
         </button>
-
-	<button class="action-btn" type="button" onclick={() => goto('/fuzzing') }>
-	  Dev Tools: Fuzzing
-	</button>
 	
       </div>
 

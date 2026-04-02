@@ -1,6 +1,7 @@
 <script>
   import { page } from '$app/stores';
   import { derived } from 'svelte/store';
+  import { goto } from '$app/navigation';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import Card from '$lib/components/Card.svelte';
   import CardRow from '$lib/components/CardRow.svelte';
@@ -163,7 +164,7 @@
         <Button label="Create Host" variant="primary" onclick={openCreateHost} />
         <Button label="Ingest Scans" variant="primary" onclick={openIngestScans} />
         <Button label="View Topology" variant="primary" onclick={() => {}} />
-        <Button label="Run Tests" variant="primary" onclick={() => {}} />
+        <Button label="Run Tests" variant="primary" onclick={() => goto('/fuzzing')} />
         <Button label="View Report" variant="primary" onclick={() => {}} />
       </div>
     </div>
