@@ -21,7 +21,7 @@
 </script>
 
 <div class="flex min-h-screen bg-gray-50">
-  <Sidebar activePage="fuzzing" />
+<Sidebar activePage="fuzzing" projectId={currentProjectId} />
 
   <main class="flex-1 p-8">
     

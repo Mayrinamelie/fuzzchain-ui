@@ -8,7 +8,7 @@ import CardRow from '$lib/components/CardRow.svelte';
 </script>
 
 <div class="flex">
-  <Sidebar activePage="home" />
+<Sidebar activePage="fuzzing" projectId={currentProjectId} />
 
   <div class="flex-1 p-8 bg-gray-50 min-h-screen">
 
