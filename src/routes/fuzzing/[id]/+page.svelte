@@ -1,85 +1,77 @@
 <script>
+  import Sidebar from '$lib/components/Sidebar.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Card from '$lib/components/Card.svelte';
+  import CardRow from '$lib/components/CardRow.svelte';
+  import TextField from '$lib/components/TextField.svelte';
+  import Checkbox from '$lib/components/Checkbox.svelte';
 
-import { page } from '$app/stores';
+  // UI State for the target list
+  let searchQuery = $state('');
+  let selectedTargets = $state(new Set());
 
-import Sidebar from '$lib/components/Sidebar.svelte';
-import Button from '$lib/components/Button.svelte';
-import Card from '$lib/components/Card.svelte';
-import CardRow from '$lib/components/CardRow.svelte';
-
-let currentProjectId = $derived($page.params.id);
-
-const project = { id: currentProjectId, name: "Demo Project" };
-
+  function toggleTarget(id) {
+    if (selectedTargets.has(id)) selectedTargets.delete(id);
+    else selectedTargets.add(id);
+  }
 </script>
 
-<div class="flex">
-  <Sidebar activePage="home" />
+<div class="flex min-h-screen bg-gray-50">
+  <Sidebar activePage="fuzzing" />
 
-  <div class="flex-1 p-8 bg-gray-50 min-h-screen">
-
-    <!--  Top Header -->
-    <div class="flex items-center justify-between mb-6">
+  <main class="flex-1 p-8">
+    
+    <div class="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
       <div>
-        <h1 class="text-2xl font-semibold">{project.name}</h1>
-        <p class="text-sm text-gray-500">Project ID: {project.id}</p>
+        <h1 class="text-xl font-bold">Demo Project</h1>
+        <p class="text-sm text-gray-500">ID: #1</p>
       </div>
-
       <Button label="Start Testing" variant="primary" />
     </div>
 
-    <!--  Section -->
-    <div class="space-y-4">
+    <div class="space-y-6">
+      <h2 class="text-lg font-bold text-gray-900">Target List</h2>
 
-      <h2 class="text-lg font-semibold">Selected Target List</h2>
+      <div class="flex items-center gap-4">
+        <div class="w-80">
+          <TextField placeholder="Search targets..." bind:value={searchQuery} />
+        </div>
 
-      <!--  Toolbar -->
-      <div class="flex items-center gap-3">
-        <input
-          type="text"
-          placeholder="Search targets..."
-          class="border rounded px-3 py-2 w-64 text-sm"
-        />
-
-        <Button label="Filter" variant="outline" />
+        <Button label="Filter" variant="primary" />
 
         <Button
           label="Add Payload to Selected Targets"
           variant="primary"
+          disabled={selectedTargets.size === 0}
         />
 
         <div class="ml-auto flex gap-2">
-          <!-- fake icons -->
-          <div class="w-8 h-8 border rounded"></div>
-          <div class="w-8 h-8 border rounded"></div>
+          <Button label="..." variant="primary" size="sm" />
         </div>
       </div>
 
-      <!--  Table Card -->
-      <Card columns="40px 1fr 1fr 1fr auto">
-
-        <!-- Header Row -->
-        <CardRow class="font-semibold text-gray-500">
-          <span></span>
+      <Card columns="50px 1.5fr 1fr 2fr auto">
+        
+        <CardRow class="text-xs font-bold text-gray-400 uppercase">
+          <span>Sel</span>
           <span>Host</span>
           <span>Service</span>
           <span>Endpoint</span>
-          <span>Payload</span>
+          <span class="text-right">Actions</span>
         </CardRow>
 
-        <!-- Rows -->
-        {#each [1,2,3,4] as _}
+        {#each [1, 2, 3, 4] as id}
           <CardRow>
-            <input type="checkbox" />
-            <span>Host</span>
-            <span>Service</span>
-            <span>Endpoint</span>
-            <Button label="Add Payload" variant="primary" />
+            <Checkbox checked={selectedTargets.has(id)} onchange={() => toggleTarget(id)} />
+            <span class="text-primary text-s">192.168.1.1</span>
+            <span class="text-primary text-s">HTTPS</span>
+            <span class="text-primary text-s">/api/v1/login</span>
+            <div class="flex justify-end">
+              <Button label="Add Payload" variant="tertiary" size="sm" />
+            </div>
           </CardRow>
         {/each}
-
       </Card>
     </div>
-
-  </div>
+  </main>
 </div>
