@@ -144,7 +144,7 @@
         <Button label="Create Host" variant="primary" onclick={openCreateHost} />
         <Button label="Ingest Scans" variant="primary" onclick={openIngestScans} />
         <Button label="View Topology" variant="primary" onclick={() => {}} />
-        <Button label="Run Tests" variant="primary" onclick={() => goto('/fuzzing')} />
+        <Button label="Run Tests" variant="primary" onclick={() => goto(`/fuzzing/${project.id}`)} />
         <Button label="View Report" variant="primary" onclick={() => {}} />
       </div>
     </div>
