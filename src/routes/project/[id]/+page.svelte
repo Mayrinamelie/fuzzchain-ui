@@ -160,16 +160,16 @@
             </div>
 
             <div class="flex gap-2">
-              <Button
-                label={expandedTargets[target.id] ? "Collapse" : "Expand Target"}
-                variant="secondary"
-                onclick={() => toggleTarget(target.id)}
-              />
               <Button label="Scan Host" variant="secondary" onclick={() => {}} />
               <Button
                 label="Add Service"
                 variant="secondary"
                 onclick={() => openAddService(target.id)}
+              />
+              <Button
+                label={expandedTargets[target.id] ? "Collapse" : "Expand Target"}
+                variant="secondary"
+                onclick={() => toggleTarget(target.id)}
               />
             </div>
           </div>
@@ -263,4 +263,4 @@
     onSecondary={() => showIngestScans = false}
     primaryDisabled={!scanFile}
   />
-</ModalForm>
+</ModalForm>  

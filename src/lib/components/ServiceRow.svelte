@@ -17,16 +17,16 @@
     <div>{service.port}/{service.protocol} - {service.name}</div>
     <div class="flex gap-2">
       <Button
-        label={expandedService ? "Collapse Service" : "Expand Service"}
-        variant="tertiary"
-        size="sm"
-        onclick={() => onToggleService()}
-      />
-      <Button
         label="Run Dirb Scan"
         variant="tertiary"
         size="sm"
         onclick={() => {}}
+      />
+      <Button
+        label={expandedService ? "Collapse Service" : "Expand Service"}
+        variant="tertiary"
+        size="sm"
+        onclick={() => onToggleService()}
       />
     </div>
   </div>
