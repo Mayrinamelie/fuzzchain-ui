@@ -1,4 +1,6 @@
 <script>
+  import { page } from '$app/stores';
+
   import Sidebar from '$lib/components/Sidebar.svelte';
   import Button from '$lib/components/Button.svelte';
   import Card from '$lib/components/Card.svelte';
@@ -9,6 +11,8 @@
   // UI State for the target list
   let searchQuery = $state('');
   let selectedTargets = $state(new Set());
+  let currentProjectId = $derived($page.params.id);
+  const project = { id: currentProjectId, name: "Demo Project" };
 
   function toggleTarget(id) {
     if (selectedTargets.has(id)) selectedTargets.delete(id);
@@ -24,7 +28,7 @@
     <div class="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
       <div>
         <h1 class="text-xl font-bold">Demo Project</h1>
-        <p class="text-sm text-gray-500">ID: #1</p>
+        <p class="text-sm text-gray-500">ID: #{currentProjectId}</p>
       </div>
       <Button label="Start Testing" variant="primary" />
     </div>
