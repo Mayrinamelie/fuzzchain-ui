@@ -5,23 +5,22 @@
 
   let {
     service,
-    expandedService,
+    expandedService = false,
     onToggleService = () => {},
-    selectedEndpoints,
-    toggleEndpoint
+    selectedEndpoints = {},
+    toggleEndpoint = () => {}
   } = $props();
 </script>
 
-<!-- Service row -->
 <CardRow>
   <div class="flex justify-between w-full pl-6 items-center">
     <div>{service.port}/{service.protocol} - {service.name}</div>
     <div class="flex gap-2">
       <Button
-        label={expandedService === service.id ? "Collapse Service" : "Expand Service"}
+        label={expandedService ? "Collapse Service" : "Expand Service"}
         variant="tertiary"
         size="sm"
-        onclick={() => onToggleService(service.id)}
+        onclick={() => onToggleService()}
       />
       <Button
         label="Run Dirb Scan"
@@ -33,8 +32,7 @@
   </div>
 </CardRow>
 
-<!-- Endpoint list -->
-{#if expandedService === service.id}
+{#if expandedService}
   {#each service.endpoints as endpoint}
     <EndpointRow
       {endpoint}
